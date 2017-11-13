@@ -1,12 +1,13 @@
 package com.crud.tasks.controller;
 
-import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.domain.TaskDto;
+import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 @RestController
@@ -23,8 +24,8 @@ public class TaskController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getById")
-    public List<TaskDto> getById() {
-        return taskMapper.mapToTaskDtoList(service.getById());
+    public TaskDto getById() {
+        return taskMapper.mapToTaskDto(service.getById((long)1));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getTask")
