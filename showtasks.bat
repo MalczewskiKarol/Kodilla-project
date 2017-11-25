@@ -8,7 +8,7 @@ goto fail
 sleep 30
 if "%ERRORLEVEL%" == "0" goto startchrome
 echo.
-echo Cannot wait 25 sec - APPLICATION STOPPED
+echo Cannot wait 30 sec - APPLICATION STOPPED
 goto fail
 
 :startchrome
