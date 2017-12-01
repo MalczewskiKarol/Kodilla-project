@@ -24,14 +24,17 @@ public class TrelloClient {
     @Value("${trello.app.token}")
     private String trelloToken;
 
+    @Value("${trello.app.username}")
+    private String trelloUsername;
+
     @Autowired
     private RestTemplate restTemplate;
 
-    public List<TrelloBoardDto> getTrelloBoards() {
-
+    private List<TrelloBoardDto> getTrelloBoards() {
         URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/karolmalczewski/boards")
                 .queryParam("key", trelloAppKey)
                 .queryParam("token", trelloToken)
+                .queryParam("username", trelloUsername)
                 .queryParam("fields", "name,id")
                 .build()
                 .encode()
@@ -43,5 +46,9 @@ public class TrelloClient {
             return Arrays.asList(boardsResponse);
         }
         return new ArrayList<>();
+
+}
+    public List<TrelloBoardDto> privateUrl() {
+        return getTrelloBoards();
     }
 }
