@@ -9,7 +9,6 @@ import lombok.Getter;
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreatedTrelloCard {
-
     @JsonProperty("id")
     private String id;
 
@@ -22,22 +21,24 @@ public class CreatedTrelloCard {
     @JsonProperty("badges")
     private Badges badges;
 
+
+
     @AllArgsConstructor
     @Getter
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Badges {
-
         @JsonProperty("votes")
         private int votes;
 
         @JsonProperty("attachmentsByType")
         private AttachmentByType attachments;
 
+
+
         @AllArgsConstructor
         @Getter
         @JsonIgnoreProperties(ignoreUnknown = true)
         static class AttachmentByType {
-
             @JsonProperty("trello")
             private Trello trello;
 
