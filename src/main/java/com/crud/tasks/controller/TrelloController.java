@@ -22,7 +22,7 @@ public class TrelloController {
 
     @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
     public List<TrelloBoardDto> getTrelloBoards() {
-        return trelloClient.privateUrl();
+        return trelloClient.getTrelloBoards();
 
 //        List<TrelloBoardDto> trelloBoards = trelloClient.privateUrl();
 //        trelloBoards.stream()

@@ -29,11 +29,11 @@ public class TrelloClient {
     @Autowired
     private RestTemplate restTemplate;
 
-    private List<TrelloBoardDto> getTrelloBoards() {
-        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig + "/members/karolmalczewski/boards")
-                .queryParam("key", trelloConfig)
-                .queryParam("token", trelloConfig)
-                .queryParam("username", trelloConfig)
+    public List<TrelloBoardDto> getTrelloBoards() {
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/members/karolmalczewski/boards")
+                .queryParam("key", trelloConfig.getTrelloAppKey())
+                .queryParam("token", trelloConfig.getTrelloToken())
+//                .queryParam("username", trelloConfig.getTrelloUsername())
                 .queryParam("fields", "name,id")
                 .queryParam("lists", "all")
                 .build()
@@ -50,9 +50,9 @@ public class TrelloClient {
     }
 
     public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
-        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig + "/cards")
-                .queryParam("key", trelloConfig)
-                .queryParam("token", trelloConfig)
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards")
+                .queryParam("key", trelloConfig.getTrelloAppKey())
+                .queryParam("token", trelloConfig.getTrelloToken())
                 .queryParam("name", trelloCardDto.getName())
                 .queryParam("desc", trelloCardDto.getDescription())
                 .queryParam("pos", trelloCardDto.getPos())
@@ -64,7 +64,7 @@ public class TrelloClient {
         return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
     }
 
-    public List<TrelloBoardDto> privateUrl() {
-        return getTrelloBoards();
-    }
+//    public List<TrelloBoardDto> privateUrl() {
+//        return getTrelloBoards();
+//    }
 }
