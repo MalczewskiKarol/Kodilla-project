@@ -2,7 +2,10 @@ package com.crud.tasks.trello.client;
 
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
+import com.crud.tasks.mapper.AttachmentByType;
+import com.crud.tasks.mapper.Badges;
 import com.crud.tasks.mapper.CreatedTrelloCard;
+import com.crud.tasks.mapper.Trello;
 import com.crud.tasks.trello.config.TrelloConfig;
 import org.junit.Before;
 import org.junit.Test;
@@ -74,7 +77,8 @@ public class TrelloClientTest {
         CreatedTrelloCard createdTrelloCard = new CreatedTrelloCard(
                 "1",
                 "Test task",
-                "http://test.com"
+                "http://test.com",
+                new Badges(1, (new AttachmentByType(new Trello(1, 1))))
         );
 
         when(restTemplate.postForObject(uri, null, CreatedTrelloCard.class)).thenReturn(createdTrelloCard);
@@ -92,14 +96,13 @@ public class TrelloClientTest {
     public void shouldReturnEmptyList() throws URISyntaxException {
         //Given
         URI uri = new URI("http://test.com/members/karolmalczewski/boards?key=test&token=test&fields=name,id&lists=all");
-        TrelloBoardDto[] boardResponse = restTemplate.getForObject(uri, TrelloBoardDto[].class);
-        when(boardResponse = null).thenReturn(new TrelloBoardDto[0]);
+        when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(null);
 
         //When
-        boardResponse = null;
         List<TrelloBoardDto> boardList = trelloClient.getTrelloBoards();
 
         //Then
-        assertEquals(1, boardList.size());
+        assertEquals(0, boardList.size());
+
     }
 }
