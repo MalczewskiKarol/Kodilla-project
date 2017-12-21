@@ -1,0 +1,44 @@
+package com.crud.tasks.service;
+
+import com.crud.tasks.domain.Mail;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
+
+@Service
+public class SimpleEmailService {
+    public static final Logger LOGGER = LoggerFactory.getLogger(SimpleMailMessage.class);
+
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+    public void send(final Mail mail) {
+        LOGGER.info("Starting mail preparation...");
+        try {
+            javaMailSender.send(createMailMessage(mail));
+            LOGGER.info("Email has been sent");
+        } catch (MailException e) {
+            LOGGER.error("Failed to process email sendings", e.getMessage(), e);
+        }
+    }
+
+    private SimpleMailMessage createMailMessage(final Mail mail) {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(mail.getMailTo());
+        mailMessage.setSubject(mail.getSubject());
+        mailMessage.setText(mail.getMessage());
+        try {
+            mailMessage.setCc(mail.getToCc());
+            if (mail.getToCc() == null) {
+                LOGGER.info("Field getToCc is optional.");
+            }
+        } finally {
+            LOGGER.info("Additional Carbon Copy won't be setted, if field getToCc is empty.");
+        }
+        return mailMessage;
+    }
+}
