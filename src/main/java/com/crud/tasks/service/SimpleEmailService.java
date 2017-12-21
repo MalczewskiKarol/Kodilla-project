@@ -38,7 +38,6 @@ public class SimpleEmailService {
             } else {
                 mailMessage.setCc(mail.getToCc());
             }
-
         } finally {
             LOGGER.info("Additional Carbon Copy won't be setted, if field getToCc is empty.");
         }
