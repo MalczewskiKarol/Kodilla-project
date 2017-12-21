@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("v1/trello")
+@RequestMapping("/v1/trello")
 public class TrelloController {
 
     @Autowired
