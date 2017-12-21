@@ -33,9 +33,13 @@ public class SimpleEmailService {
         mailMessage.setText(mail.getMessage());
         try {
             mailMessage.setCc(mail.getToCc());
+
             if (mail.getToCc() == null) {
                 LOGGER.info("Field getToCc is optional.");
+            } else {
+                mailMessage.setCc(mail.getToCc());
             }
+
         } finally {
             LOGGER.info("Additional Carbon Copy won't be setted, if field getToCc is empty.");
         }
