@@ -17,7 +17,7 @@ public class SimpleEmailService {
     private JavaMailSender javaMailSender;
 
     public void send(final Mail mail) {
-        LOGGER.info("Starting mail preparation...");
+        LOGGER.info("Starting email preparation...");
         try {
             javaMailSender.send(createMailMessage(mail));
             LOGGER.info("Email has been sent");
@@ -32,7 +32,6 @@ public class SimpleEmailService {
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
         try {
-            mailMessage.setCc(mail.getToCc());
             if (mail.getToCc() == null) {
                 LOGGER.info("Field getToCc is optional.");
             } else {
