@@ -17,7 +17,7 @@ import static java.util.Optional.ofNullable;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.Silent.class)
+@RunWith(MockitoJUnitRunner.class)
 public class TaskControllerTestSuite {
 
     @InjectMocks
@@ -78,15 +78,15 @@ public class TaskControllerTestSuite {
 //    @Test
 //    public void deleteTask() throws TaskNotFoundException {
 //        //Given
-//        List<Task> tasks = new ArrayList<>();
 //        Task task = new Task(1L, "test", "test");
-//        tasks.add(task);
+//        List<Task> taskList = new ArrayList<>();
+//        taskList.add(task);
 //
 //        //When
 //        taskController.deleteTask(1L);
 //
 //        //Then
-//        assertEquals(0, tasks.size());
+//        assertTrue(taskList.isEmpty());
 //    }
 
     @Test
