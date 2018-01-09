@@ -100,7 +100,6 @@ public class TaskControllerTest {
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(status().isOk());
-        verify(dbService, times(1)).getTask(1L);
         verify(dbService, times(1)).deleteTask(1L);
         verifyNoMoreInteractions(dbService);
     }
