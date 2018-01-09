@@ -1,7 +1,5 @@
 package com.crud.tasks.controller;
 
-//@RunWith(MockitoJUnitRunner.class)
-
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.domain.TrelloListDto;
@@ -44,6 +42,7 @@ public class TrelloControllerTest {
 
     @Test
     public void shouldFetchEmptyTrelloBoards() throws Exception {
+
         //Given
         List<TrelloBoardDto> trelloBoards = new ArrayList<>();
         when(facade.fetchTrelloBoards()).thenReturn(trelloBoards);
@@ -56,6 +55,7 @@ public class TrelloControllerTest {
 
     @Test
     public void shouldFetchTrelloBoards() throws Exception {
+
         //Given
         List<TrelloListDto> trelloLists = new ArrayList<>();
         trelloLists.add(new TrelloListDto("1", "test list", false));
