@@ -3,10 +3,6 @@ package com.crud.tasks.service;
 import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloListDto;
-import com.crud.tasks.mapper.AttachmentByType;
-import com.crud.tasks.mapper.Badges;
-import com.crud.tasks.mapper.CreatedTrelloCardDto;
-import com.crud.tasks.mapper.Trello;
 import com.crud.tasks.trello.client.TrelloClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,11 +54,18 @@ public class TrelloServiceTestSuite {
         });
     }
 
-    @Test
-    public void createTrelloCard() {
-        //Given
-        CreatedTrelloCardDto trelloCardDto = new CreatedTrelloCardDto("1", "test", "www.o2.pl", new Badges(1, new AttachmentByType(new Trello(1, 1))));
-
-    }
+//    @Test
+//    public void testCreateTrelloCard() {
+//        //Given
+//        List<TrelloCardDto> trelloCardDtos = new ArrayList<>();
+//        TrelloCardDto trelloCardDto = new TrelloCardDto("test", "test desc", "bot", "test");
+//        trelloCardDtos.add(trelloCardDto);
+//
+//        //When
+//        CreatedTrelloCardDto result = trelloClient.createNewCard(trelloCardDto);
+//
+//        //Then
+//        assertEquals(result.getName(), "test");
+//    }
 
 }

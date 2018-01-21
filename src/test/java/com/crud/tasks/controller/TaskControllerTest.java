@@ -87,7 +87,6 @@ public class TaskControllerTest {
         Task task = new Task(1L, "test", "test");
         taskList.add(task);
 
-//        when(dbService.getTask(1L)).thenReturn(Optional.ofNullable(task));
         doNothing().when(dbService).deleteTask(1L);
 
         Gson gson = new Gson();
