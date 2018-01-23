@@ -40,7 +40,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 
 //Comment this \/ to run on Heroku
-	compile('mysql:mysql-connector-java')
+	compile('mysql:mysql-connector-java') // OR
 	//Comment this \/ to run on Tomcat
 //	compile('org.postgresql:postgresql')
 
