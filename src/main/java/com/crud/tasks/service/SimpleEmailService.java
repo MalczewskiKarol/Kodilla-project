@@ -57,20 +57,20 @@ public class SimpleEmailService {
 //        };
 //    }
 
-    private SimpleMailMessage createMailMessage(final Mail mail) {
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(mail.getMailTo());
-        mailMessage.setSubject(mail.getSubject());
-        mailMessage.setText(mail.getMessage());
-        try {
-            if (mail.getToCc() == null) {
-                LOGGER.info("Field getToCc is optional.");
-            } else {
-                mailMessage.setCc(mail.getToCc());
-            }
-        } finally {
-            LOGGER.info("Additional Carbon Copy won't be setted, if field getToCc is empty.");
-        }
-        return mailMessage;
-    }
+//    private SimpleMailMessage createMailMessage(final Mail mail) {
+//        SimpleMailMessage mailMessage = new SimpleMailMessage();
+//        mailMessage.setTo(mail.getMailTo());
+//        mailMessage.setSubject(mail.getSubject());
+//        mailMessage.setText(mail.getMessage());
+//        try {
+//            if (mail.getToCc() == null) {
+//                LOGGER.info("Field getToCc is optional.");
+//            } else {
+//                mailMessage.setCc(mail.getToCc());
+//            }
+//        } finally {
+//            LOGGER.info("Additional Carbon Copy won't be setted, if field getToCc is empty.");
+//        }
+//        return mailMessage;
+//    }
 }

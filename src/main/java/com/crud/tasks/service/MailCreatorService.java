@@ -61,7 +61,11 @@ public class MailCreatorService {
 
         Context context = new Context();
         context.setVariable("preview", "Daily task manager");
-        context.setVariable("message", "Currently in database you got: " + taskRepository.count() + "tasks");
+        if(taskRepository.count() == 1) {
+            context.setVariable("message", "Currently in database you got: " + taskRepository.count() + " task");
+        } else {
+            context.setVariable("message", "Currently in database you got: " + taskRepository.count() + " tasks");
+        }
         context.setVariable("tasks_url", "https://malczewskikarol.github.io");
         context.setVariable("button", "Check Tasks");
         context.setVariable("byebye", "Best regards" + ownerConfig.getOwnerName());
