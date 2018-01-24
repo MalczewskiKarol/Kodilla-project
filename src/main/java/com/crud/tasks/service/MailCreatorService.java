@@ -68,7 +68,7 @@ public class MailCreatorService {
         }
         context.setVariable("tasks_url", "https://malczewskikarol.github.io");
         context.setVariable("button", "Check Tasks");
-        context.setVariable("byebye", "Best regards" + ownerConfig.getOwnerName());
+        context.setVariable("byebye", "Best regards " + ownerConfig.getOwnerName());
         context.setVariable("company", ownerConfig.getOwnerName() + " " + ownerConfig.getOwnerSurname() + "     " + companyConfig.getCompanyEmail());
         context.setVariable("admin_name", adminConfig.getAdminName());
         context.setVariable("show_button", true);
