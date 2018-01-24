@@ -24,21 +24,38 @@ public class SimpleEmailService {
     public void send(final Mail mail) {
         LOGGER.info("Starting email preparation...");
         try {
-            javaMailSender.send(createMimeMessage(mail));
+            javaMailSender.send(createDailyMessage(mail));
             LOGGER.info("Email has been sent");
         } catch (MailException e) {
             LOGGER.error("Failed to process email sendings", e.getMessage(), e);
         }
     }
+    private boolean taskOrCardMessage() {
+        return true;
+    }
 
-    private MimeMessagePreparator createMimeMessage(final Mail mail) {
-        return mimeMessage -> {
-            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+    private MimeMessagePreparator createDailyMessage(final Mail mail) {
+        return dailyMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(dailyMessage);
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+            if(taskOrCardMessage()) {
+                messageHelper.setText(mailCreatorService.buildTrelloDailyEmail(mail.getMessage()), true);
+            } else {
+                messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+            }
+
         };
     }
+//
+//    private MimeMessagePreparator createMimeMessage(final Mail mail) {
+//        return mimeMessage -> {
+//            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+//            messageHelper.setTo(mail.getMailTo());
+//            messageHelper.setSubject(mail.getSubject());
+//            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+//        };
+//    }
 
     private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
