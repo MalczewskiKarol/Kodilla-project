@@ -31,7 +31,7 @@ public class SimpleEmailService {
         }
     }
     private boolean taskOrCardMessage() {
-        return true;
+        return false;
     }
 
     private MimeMessagePreparator createDailyMessage(final Mail mail) {
