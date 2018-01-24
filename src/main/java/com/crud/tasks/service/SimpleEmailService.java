@@ -31,7 +31,7 @@ public class SimpleEmailService {
         }
     }
     private boolean taskOrCardMessage() {
-        return false;
+        return false; // <-- Set True if You want daily Task email
     }
 
     private MimeMessagePreparator createDailyMessage(final Mail mail) {
@@ -44,7 +44,6 @@ public class SimpleEmailService {
             } else {
                 messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
             }
-
         };
     }
 //
