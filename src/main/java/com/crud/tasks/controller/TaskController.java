@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/v1")
 public class TaskController {
@@ -29,9 +29,9 @@ public class TaskController {
         return taskMapper.mapToTaskDto(service.getTask(taskId).orElseThrow(TaskNotFoundException::new));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/tasks", consumes = APPLICATION_JSON_VALUE)
-    public void createTask(@RequestBody TaskDto taskDto) {
-        service.saveTask(taskMapper.mapToTask(taskDto));
+    @RequestMapping(method = RequestMethod.DELETE, value = "/tasks/{taskId}")
+    public void deleteTask(@RequestParam Long taskId) throws TaskNotFoundException {
+        service.deleteTask(taskId);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/tasks")
@@ -39,12 +39,8 @@ public class TaskController {
         return taskMapper.mapToTaskDto(service.saveTask(taskMapper.mapToTask(taskDto)));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/tasks/{taskId}")
-    public void deleteTask(@RequestParam Long taskId) throws TaskNotFoundException {
-        service.deleteTask(taskId);
+    @RequestMapping(method = RequestMethod.POST, value = "/tasks", consumes = APPLICATION_JSON_VALUE)
+    public void createTask(@RequestBody TaskDto taskDto) {
+        service.saveTask(taskMapper.mapToTask(taskDto));
     }
 }
-
-
-
-
