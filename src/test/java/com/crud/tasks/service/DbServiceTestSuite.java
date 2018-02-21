@@ -1,5 +1,6 @@
 package com.crud.tasks.service;
 
+import com.crud.tasks.controller.TaskNotFoundException;
 import com.crud.tasks.domain.Task;
 import com.crud.tasks.repository.TaskRepository;
 import org.junit.Test;
@@ -13,6 +14,8 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -22,7 +25,7 @@ public class DbServiceTestSuite {
     private DbService service;
 
     @Mock
-    TaskRepository repository;
+    private TaskRepository repository;
 
     @Test
     public void shouldGetAllTasks() {
@@ -52,5 +55,31 @@ public class DbServiceTestSuite {
         service.saveTask(task);
         //Then
         assertNotNull(task);
+    }
+
+    @Test
+    public void shouldGetTask() throws TaskNotFoundException {
+        //Given
+        List<Task> taskList = new ArrayList<>();
+        Task task = new Task(1, "test", "test");
+        taskList.add(task);
+        when(repository.findById(1L)).thenReturn(java.util.Optional.ofNullable(task));
+        //When
+        service.getTask(1L).orElseThrow(TaskNotFoundException::new);
+        //Then
+        assertNotNull(task);
+    }
+
+    @Test
+    public void shouldDeleteTask() {
+        //Given
+        List<Task> taskList = new ArrayList<>();
+        Task task = new Task(1L, "test", "test");
+        taskList.add(task);
+        doNothing().when(repository).deleteById(1L);
+        //When
+        service.deleteTask(1L);
+        //Then
+        verify(repository).deleteById(1L);
     }
 }
